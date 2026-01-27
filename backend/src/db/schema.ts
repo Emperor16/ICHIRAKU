@@ -27,6 +27,9 @@ export const products = pgTable("products", {
 export const comments = pgTable("comments", {
     id: uuid("id").primaryKey().defaultRandom(),
     content: text("content").notNull(),
+    productId: uuid("product_id")
+        .notNull()
+        .references(() => products.id, { onDelete: "cascade" }),
     userId: text("user_id")
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }), // onDelete cascade to remove comments when user is deleted
@@ -52,14 +55,14 @@ export const productsRelations = relations(products, ({ one, many }) => ({
     }),
 })); 
 
-// A comment belongs to a user and  one product
+// A comment belongs to a user and one product
 export const commentsRelations = relations(comments, ({ one }) => ({
     user: one(users, {
         fields: [comments.userId], //the foreign key field in comments table {comments.userId}
         references: [users.id], //the primary key field in users table
     }),
     product : one(products, {
-        fields: [comments.id], //the foreign key field in comments table {comments.id}
+        fields: [comments.productId], //the foreign key field in comments table {comments.productId}
         references: [products.id], //the primary key field in products table
     }),
 }));

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "./src", // Where your source files are
     "outDir": "./dist", // Where compiled JS goes
-    "module": "commonjs", // Output format (require/module.exports)
+    "module": "esnext", // Output format (require/module.exports)
     "target": "es2022", // JS version to compile to (modern)
     "esModuleInterop": true, // Allows `import x from 'y'` syntax with CommonJS modules
     "strict": true, // Enables all strict type-checking
@@ -11,6 +11,13 @@
     "resolveJsonModule": true, // Allows importing .json files
     "forceConsistentCasingInFileNames": true // Prevents case-sensitivity bugs
   },
-  "include": ["src/**/*.ts"], // Which files to compile
+  "ts-node": {
+    "esm": true,
+    "experimentalESM": true,
+    "moduleTypes": {
+      "./src/**/*.ts": "esm"
+    }
+  },
+  "include": ["src/**/*.ts", "src/controllers/commentController.ts"], // Which files to compile
   "exclude": ["node_modules"] // Which files to ignore
 }

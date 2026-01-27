@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
   "ignore": ["src/**/*.spec.ts"],
-  "ext": "ts, html, css, js, json",
-  "exec": "ts-node src/index.ts"
+  "ext": "ts,html,css,js,json",
+  "exec": "node --trace-deprecation node_modules/tsx/dist/cli.mjs src/index.ts"
 }

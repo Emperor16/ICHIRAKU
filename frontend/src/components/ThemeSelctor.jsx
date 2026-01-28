@@ -39,7 +39,7 @@ const THEMES = [
 function ThemeSelctor() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-        return localStorage.getItem('theme') || 'lighht';
+        return localStorage.getItem('theme') || 'light';
     }
     return 'light';
   });
